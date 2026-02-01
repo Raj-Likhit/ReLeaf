@@ -102,7 +102,7 @@ export default function Cart() {
                                         key={item.id}
                                         initial={{ opacity: 0, scale: 0.95 }}
                                         animate={{ opacity: 1, scale: 1 }}
-                                        exit={{ opacity: 0, height: 0, opacity: 0 }}
+                                        exit={{ opacity: 0, height: 0 }}
                                         className="p-4 md:p-6 rounded-[2.5rem] bg-[#0a2018]/60 border border-green-500/10 backdrop-blur-md flex flex-col md:flex-row gap-6 md:items-center group hover:border-green-500/30 transition-all hover:bg-[#0a2018]/80 relative overflow-hidden"
                                     >
                                         <div className="w-full md:w-32 h-32 rounded-[1.5rem] bg-black/20 overflow-hidden relative">
