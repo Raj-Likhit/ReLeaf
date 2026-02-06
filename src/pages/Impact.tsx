@@ -1,5 +1,4 @@
-import React from 'react';
-import { motion, useScroll, useTransform } from 'framer-motion';
+import { motion } from 'framer-motion';
 import SEO from '../components/SEO';
 
 export default function Impact() {
@@ -25,6 +24,43 @@ export default function Impact() {
                         The tech industry generates 50 million tons of e-waste annually.
                         We're here to change that, one case at a time.
                     </p>
+                </motion.div>
+
+                {/* Origin Story */}
+                <motion.div
+                    initial={{ opacity: 0, y: 30 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    className="mb-32 max-w-5xl mx-auto"
+                >
+                    <div className="bg-[#0a2018]/40 border border-green-500/10 rounded-[3rem] p-8 md:p-12 relative overflow-hidden">
+                        <div className="absolute top-0 right-0 w-96 h-96 bg-green-500/5 rounded-full blur-[100px] pointer-events-none" />
+
+                        <div className="flex flex-col md:flex-row gap-12 items-center">
+                            <div className="flex-1 space-y-6">
+                                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/5 border border-white/10 text-green-400 text-xs font-bold uppercase tracking-wider">
+                                    <span className="w-1.5 h-1.5 rounded-full bg-green-500" />
+                                    The Origin
+                                </div>
+                                <h2 className="text-3xl md:text-4xl font-bold text-white">It started on a beach.</h2>
+                                <div className="space-y-4 text-green-100/70 leading-relaxed text-lg">
+                                    <p>
+                                        In 2023, our founder stood on a pristine shoreline, watching the tide roll in. But ensuring every wave brought something else with it: plastic.
+                                    </p>
+                                    <p>
+                                        Among the debris was a phone case-cracked, faded, but undeniably permanent. It was a stark realization: the device we use to connect with the world was physically disconnecting us from nature.
+                                    </p>
+                                    <p>
+                                        We spent the next 3 years in the lab, obsessively engineering a material that could withstand a military-grade drop test, yet return to the earth in just 6 months.
+                                    </p>
+                                </div>
+                            </div>
+                            <div className="w-full md:w-1/3 aspect-[3/4] relative rounded-3xl overflow-hidden group">
+                                <div className="absolute inset-0 bg-green-900/20 mix-blend-multiply z-10" />
+                                <img src="/alpine-mist.png" alt="Prototype Case" className="w-full h-full object-cover scale-110 group-hover:scale-100 transition-transform duration-1000" />
+                            </div>
+                        </div>
+                    </div>
                 </motion.div>
 
                 <div className="grid md:grid-cols-3 gap-6 mb-32">

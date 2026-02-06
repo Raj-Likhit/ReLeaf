@@ -1,6 +1,6 @@
-import React from 'react';
-import { motion, useScroll, useTransform } from 'framer-motion';
-import { Layers, Droplets, Zap, Cpu, Scan, Recycle, Star } from 'lucide-react';
+
+import { motion } from 'framer-motion';
+import { Layers, Droplets, Zap, Cpu, Scan, Recycle } from 'lucide-react';
 import SEO from '../components/SEO';
 
 export default function Technology() {

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ShoppingBag, Loader, Plus } from 'lucide-react';
 import { useCart } from '../context/CartContext';
@@ -6,19 +6,24 @@ import { useToast } from '../context/ToastContext';
 import SEO from '../components/SEO';
 import { api } from '../services/api';
 import ErrorState from '../components/ErrorState';
+import { Product } from '../types';
+
+interface CoreProducts {
+    [key: string]: Product;
+}
 
 export default function Products() {
-    const [activeColor, setActiveColor] = useState('forest');
-    const [activeModel, setActiveModel] = useState('iPhone 17 Pro Max');
+    const [activeColor, setActiveColor] = useState<string>('forest');
+    const [activeModel, setActiveModel] = useState<string>('iPhone 17 Pro Max');
     const { addToCart } = useCart();
     const { addToast } = useToast();
-    const [addingToCart, setAddingToCart] = useState(false);
+    const [addingToCart, setAddingToCart] = useState<boolean>(false);
 
     // Data States
-    const [products, setProducts] = useState(null);
-    const [newArrivals, setNewArrivals] = useState([]);
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(null);
+    const [products, setProducts] = useState<CoreProducts | null>(null);
+    const [newArrivals, setNewArrivals] = useState<Product[]>([]);
+    const [loading, setLoading] = useState<boolean>(true);
+    const [error, setError] = useState<boolean | null>(null);
 
     const loadData = async () => {
         setLoading(true);
@@ -47,29 +52,30 @@ export default function Products() {
         setAddingToCart(true);
         // Simulate network delay for effect
         setTimeout(() => {
+            const product = products[activeColor];
             addToCart({
-                id: products[activeColor].id,
-                name: products[activeColor].name,
+                id: product.id,
+                name: product.name,
                 color: activeColor,
                 model: activeModel,
-                price: products[activeColor].price,
-                image: products[activeColor].image
+                price: product.price,
+                image: product.image
             });
-            addToast(`Added ${products[activeColor].name} to cart`);
+            addToast(`Added ${product.name} to cart`);
             setAddingToCart(false);
         }, 500);
     };
 
-    const handleQuickAdd = (item) => {
+    const handleQuickAdd = (item: Product) => {
         addToCart({
             id: item.id,
-            name: item.title,
+            name: item.name,
             color: item.colorName,
             model: 'iPhone 17 Pro Max',
             price: item.price,
             image: item.image
         });
-        addToast(`Added ${item.title} to cart`);
+        addToast(`Added ${item.name} to cart`);
     };
 
     if (loading) {

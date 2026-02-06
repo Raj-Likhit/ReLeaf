@@ -1,28 +1,29 @@
-import React, { Suspense, lazy } from 'react';
+import { Suspense, lazy } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
 import { Loader } from 'lucide-react';
 
 // Contexts
-import { CartProvider } from './context/CartContext';
-import { ToastProvider } from './context/ToastContext';
+import { CartProvider } from '@/context/CartContext';
+import { ToastProvider } from '@/context/ToastContext';
 
 // Components
-import Layout from './components/Layout';
-import ScrollToTop from './components/ScrollToTop';
-import LegalConsent from './components/LegalConsent';
+import Layout from '@/components/Layout';
+import ScrollToTop from '@/components/ScrollToTop';
+import LegalConsent from '@/components/LegalConsent';
 
 // Lazy Loaded Pages
-const Home = lazy(() => import('./pages/Home'));
-const Products = lazy(() => import('./pages/Products'));
-const Technology = lazy(() => import('./pages/Technology'));
-const Impact = lazy(() => import('./pages/Impact'));
-const Cart = lazy(() => import('./pages/Cart'));
+const Home = lazy(() => import('@/pages/Home'));
+const Products = lazy(() => import('@/pages/Products'));
+
+const Technology = lazy(() => import('@/pages/Technology'));
+const Impact = lazy(() => import('@/pages/Impact'));
+const Cart = lazy(() => import('@/pages/Cart'));
 
 // Legal Pages
-const Privacy = lazy(() => import('./pages/legal/Privacy'));
-const Terms = lazy(() => import('./pages/legal/Terms'));
-const Refund = lazy(() => import('./pages/legal/Refund'));
+const Privacy = lazy(() => import('@/pages/legal/Privacy'));
+const Terms = lazy(() => import('@/pages/legal/Terms'));
+const Refund = lazy(() => import('@/pages/legal/Refund'));
 
 const PageLoader = () => (
     <div className="min-h-screen bg-[#051a14] flex items-center justify-center">
@@ -42,6 +43,7 @@ function App() {
                                 <Routes>
                                     <Route path="/" element={<Home />} />
                                     <Route path="/products" element={<Products />} />
+
                                     <Route path="/technology" element={<Technology />} />
                                     <Route path="/impact" element={<Impact />} />
                                     <Route path="/cart" element={<Cart />} />

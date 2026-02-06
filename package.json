@@ -20,8 +20,9 @@
     "tailwind-merge": "^2.4.0"
   },
   "devDependencies": {
-    "@types/react": "^18.3.3",
-    "@types/react-dom": "^18.3.0",
+    "@types/node": "^25.2.1",
+    "@types/react": "^18.3.28",
+    "@types/react-dom": "^18.3.7",
     "@vitejs/plugin-react": "^4.3.1",
     "autoprefixer": "^10.4.19",
     "eslint": "^9.9.0",
@@ -30,7 +31,10 @@
     "eslint-plugin-react-refresh": "^0.4.9",
     "globals": "^15.9.0",
     "postcss": "^8.4.39",
+    "sharp": "^0.34.5",
     "tailwindcss": "^3.4.6",
-    "vite": "^5.4.1"
+    "typescript": "^5.9.3",
+    "vite": "^5.4.1",
+    "vite-plugin-image-optimizer": "^2.0.3"
   }
 }

@@ -32,7 +32,7 @@ export const CORE_PRODUCTS = {
 export const LIMITED_EDITIONS = [
     {
         id: 'le_alpine',
-        title: "Alpine Mist",
+        name: "Alpine Mist",
         price: 54.00,
         colorName: "alpine",
         image: "/alpine-mist.png",
@@ -42,7 +42,7 @@ export const LIMITED_EDITIONS = [
     },
     {
         id: 'le_sahara',
-        title: "Sahara Stealth",
+        name: "Sahara Stealth",
         price: 54.00,
         colorName: "sahara",
         image: "/sahara-stealth.png",
@@ -52,7 +52,7 @@ export const LIMITED_EDITIONS = [
     },
     {
         id: 'le_carbon',
-        title: "Carbon Zero",
+        name: "Carbon Zero",
         price: 59.00,
         colorName: "carbon",
         image: "/carbon-zero.png",

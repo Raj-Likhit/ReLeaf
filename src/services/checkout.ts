@@ -1,7 +1,9 @@
 // This is a scaffold for Stripe integration.
 // In a real app, you would fetch a session ID from your backend.
 
-export const processCheckout = async (cartItems) => {
+import { CartItem } from '../types';
+
+export const processCheckout = async (cartItems: CartItem[]): Promise<{ success: boolean; url: string }> => {
     console.log("Initiating Checkout...");
 
     // 1. Format items for standard payment gateways (e.g., Stripe)

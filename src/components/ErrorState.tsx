@@ -1,14 +1,21 @@
-import React from 'react';
+
 import { motion } from 'framer-motion';
 import { CloudRain, RefreshCw, Home } from 'lucide-react';
 import { Link } from 'react-router-dom';
+
+interface ErrorStateProps {
+    title?: string;
+    message?: string;
+    onRetry?: () => void;
+    actionLabel?: string;
+}
 
 export default function ErrorState({
     title = "A fallen leaf...",
     message = "We encountered a small snag in the ecosystem. Don't worry, nature bounces back.",
     onRetry,
     actionLabel = "Regrow Connection"
-}) {
+}: ErrorStateProps) {
     return (
         <div className="min-h-[50vh] flex items-center justify-center p-6 text-center">
             <motion.div

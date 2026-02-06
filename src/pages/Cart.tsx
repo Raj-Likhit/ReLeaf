@@ -1,6 +1,6 @@
-import React from 'react';
+
 import { motion, AnimatePresence } from 'framer-motion';
-import { Trash2, ArrowRight, ShieldCheck, CreditCard, Lock, RotateCcw, Truck, Gift } from 'lucide-react';
+import { Trash2, ArrowRight, Lock, RotateCcw, Truck, Gift } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useCart } from '../context/CartContext';
 import { useToast } from '../context/ToastContext';
@@ -8,7 +8,7 @@ import SEO from '../components/SEO';
 import { processCheckout } from '../services/checkout';
 import { useState } from 'react';
 
-const TrustBadge = ({ icon: Icon, text }) => (
+const TrustBadge = ({ icon: Icon, text }: { icon: any; text: string }) => (
     <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-green-200/50">
         <Icon className="w-4 h-4" /> {text}
     </div>

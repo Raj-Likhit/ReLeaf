@@ -1,20 +1,20 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect, ReactNode } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { ShoppingBag, Leaf, Instagram, Twitter, Facebook, Menu, X } from 'lucide-react';
-import clsx from 'clsx';
+import clsx, { ClassValue } from 'clsx';
 import { twMerge } from 'tailwind-merge';
 import { useCart } from '../context/CartContext';
 import { motion, AnimatePresence } from 'framer-motion';
 
-function cn(...inputs) {
+function cn(...inputs: ClassValue[]) {
     return twMerge(clsx(inputs));
 }
 
 // ... Navbar and Footer components remain unchanged ...
 
 const Navbar = () => {
-    const [scrolled, setScrolled] = useState(false);
-    const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+    const [scrolled, setScrolled] = useState<boolean>(false);
+    const [mobileMenuOpen, setMobileMenuOpen] = useState<boolean>(false);
     const location = useLocation();
     const { cartCount } = useCart();
 
@@ -34,31 +34,71 @@ const Navbar = () => {
 
     return (
         <>
-            <div className="fixed top-0 left-0 right-0 z-50 flex justify-center transition-all duration-500 pointer-events-none">
-                <nav className={cn(
-                    "pointer-events-auto transition-all duration-500 ease-spring",
-                    scrolled
-                        ? "mt-4 mx-4 w-full max-w-4xl bg-[#051a14]/80 backdrop-blur-xl border border-white/10 rounded-full py-3 px-6 shadow-2xl shadow-black/20"
-                        : "mt-0 w-full bg-transparent py-6 px-6 md:px-8 border-transparent"
-                )}>
+            <div className="fixed top-0 left-0 right-0 z-50 flex justify-center pointer-events-none">
+                <motion.nav
+                    initial={false}
+                    animate={scrolled ? "scrolled" : "top"}
+                    variants={{
+                        top: {
+                            width: "100%",
+                            maxWidth: "100%",
+                            marginTop: 0,
+                            paddingTop: 24, // py-6 = 1.5rem = 24px
+                            paddingBottom: 24,
+                            paddingLeft: 24, // px-6
+                            paddingRight: 24,
+                            backgroundColor: "rgba(5, 26, 20, 0)",
+                            borderRadius: 0,
+                            borderColor: "transparent",
+                            boxShadow: "0 0 0 rgba(0,0,0,0)"
+                        },
+                        scrolled: {
+                            width: "calc(100% - 2rem)", // mx-4 equivalent
+                            maxWidth: "56rem", // max-w-4xl
+                            marginTop: 16, // mt-4
+                            paddingTop: 12, // py-3
+                            paddingBottom: 12,
+                            paddingLeft: 24, // px-6
+                            paddingRight: 24,
+                            backgroundColor: "rgba(5, 26, 20, 0.8)",
+                            borderRadius: 9999, // rounded-full
+                            borderColor: "rgba(255, 255, 255, 0.1)",
+                            boxShadow: "0 25px 50px -12px rgba(0, 0, 0, 0.2)"
+                        }
+                    }}
+                    transition={{
+                        type: "spring",
+                        stiffness: 120,
+                        damping: 20,
+                        mass: 1
+                    }}
+                    className="pointer-events-auto backdrop-blur-xl border"
+                >
                     <div className="flex items-center justify-between">
                         {/* Logo */}
                         <Link to="/" className="flex items-center gap-2 group relative z-50" onClick={handleLinkClick}>
-                            <div className="p-1.5 bg-green-500 rounded-lg group-hover:rotate-12 transition-transform shadow-[0_0_15px_rgba(34,197,94,0.4)]">
+                            <motion.div
+                                layout
+                                className="p-1.5 bg-green-500 rounded-lg group-hover:rotate-12 transition-transform shadow-[0_0_15px_rgba(34,197,94,0.4)]"
+                            >
                                 <Leaf className="w-5 h-5 text-black fill-current" />
-                            </div>
-                            <span className={cn(
-                                "text-xl font-bold tracking-tight text-white transition-all duration-300",
-                                scrolled ? "opacity-100 md:opacity-100" : "opacity-100"
-                            )}>
+                            </motion.div>
+                            <motion.span
+                                layout
+                                className="text-xl font-bold tracking-tight text-white"
+                            >
                                 ReLeaf
-                            </span>
+                            </motion.span>
                         </Link>
 
                         {/* Desktop Nav - Centered in Floating Mode */}
-                        <div className="hidden md:flex items-center gap-1 bg-white/5 rounded-full p-1 border border-white/5 backdrop-blur-sm">
+                        <motion.div
+                            layout
+                            className="hidden md:flex items-center gap-1 bg-white/5 rounded-full p-1 border border-white/5 backdrop-blur-sm"
+                        >
                             {[
                                 { name: 'Products', path: '/products' },
+
                                 { name: 'Impact', path: '/impact' },
                                 { name: 'Technology', path: '/technology' },
                             ].map((item) => (
@@ -75,10 +115,10 @@ const Navbar = () => {
                                     {item.name}
                                 </Link>
                             ))}
-                        </div>
+                        </motion.div>
 
                         {/* Actions */}
-                        <div className="flex items-center gap-3">
+                        <motion.div layout className="flex items-center gap-3">
                             <Link
                                 to="/cart"
                                 className={cn(
@@ -101,9 +141,9 @@ const Navbar = () => {
                             >
                                 {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
                             </button>
-                        </div>
+                        </motion.div>
                     </div>
-                </nav>
+                </motion.nav>
             </div>
 
             {/* Mobile Menu Overlay */}
@@ -196,7 +236,11 @@ const Footer = () => {
     )
 }
 
-export default function Layout({ children }) {
+interface LayoutProps {
+    children: ReactNode;
+}
+
+export default function Layout({ children }: LayoutProps) {
     return (
         <div className="min-h-screen bg-nature-gradient bg-nature-pattern text-white font-sans selection:bg-green-500/30 selection:text-green-100 flex flex-col">
             <Navbar />
